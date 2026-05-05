@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>潜在ポテンシャル統一理論 - 理論アーカイブ</title>
+    
+    <!-- MathJax: 数式レンダリングライブラリ -->
+    <script>
+        window.MathJax = {
+            tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$']] },
+            options: { enableMenu: false }
+        };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+
+    <style>
+        :root {
+            /* Light Mode Palette */
+            --bg: #f1f5f9;
+            --header-bg: rgba(255, 255, 255, 0.8);
+            --card-bg: #ffffff;
+            --primary: #4f46e5; /* Indigo */
+            --primary-hover: #4338ca;
+            --text: #0f172a; /* Slate 900 */
+            --text-muted: #64748b; /* Slate 500 */
+            --border: #e2e8f0;
+            --accent: #f5f3ff;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                /* Dark Mode Palette */
+                --bg: #020617; /* Slate 950 */
+                --header-bg: rgba(15, 23, 42, 0.8);
+                --card-bg: #0f172a; /* Slate 900 */
+                --primary: #818cf8; /* Indigo 400 */
+                --primary-hover: #6366f1;
+                --text: #f1f5f9;
+                --text-muted: #94a3b8;
+                --border: #1e293b;
+                --accent: #1e1b4b;
+            }
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding-bottom: 80px;
+            line-height: 1.6;
+            transition: background-color 0.3s ease;
+        }
+
+        header {
+            background: var(--header-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 16px;
+            text-align: center;
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        header h1 { 
+            margin: 0; 
+            font-size: 1.1rem; 
+            font-weight: 700; 
+            letter-spacing: -0.02em;
+            background: linear-gradient(to right, var(--primary), #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .container { 
+            padding: 24px 16px; 
+            max-width: 640px; 
+            margin: 0 auto; 
+        }
+
+        /* Table of Contents */
+        .toc-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 32px;
+            border: 1px solid var(--border);
+            box-shadow: 0 4px 20px -4px rgba(0, 0, 0, 0.1);
+        }
+
+        .toc-title {
+            font-size: 0.75rem;
+            font-weight: 800;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .toc-list { list-style: none; padding: 0; margin: 0; }
+        .toc-list li { margin-bottom: 12px; }
+        .toc-list a { 
+            color: var(--text); 
+            text-decoration: none; 
+            font-size: 0.95rem; 
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            transition: color 0.2s;
+        }
+        .toc-list a:hover { color: var(--primary); }
+        .toc-list a::before {
+            content: '→';
+            margin-right: 8px;
+            font-size: 0.8rem;
+            opacity: 0.5;
+        }
+
+        /* Sections */
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: 800;
+            margin: 48px 0 20px;
+            color: var(--text);
+            scroll-margin-top: 100px;
+            letter-spacing: -0.02em;
+        }
+
+        /* Formula Card */
+        .card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid var(--border);
+            box-shadow: 0 2px 8px -2px rgba(0, 0, 0, 0.05);
+            position: relative;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 20px -8px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-header { 
+            font-size: 0.8rem; 
+            font-weight: 700; 
+            color: var(--text-muted); 
+            margin-bottom: 16px; 
+            padding-right: 64px;
+            display: block;
+        }
+
+        .formula-display { 
+            font-size: 1.15rem; 
+            overflow-x: auto; 
+            padding: 8px 0;
+            color: var(--text);
+        }
+
+        /* Copy Button */
+        .copy-btn {
+            position: absolute; 
+            top: 16px; 
+            right: 16px;
+            background: var(--accent); 
+            border: none;
+            color: var(--primary); 
+            padding: 6px 12px; 
+            border-radius: 8px;
+            font-size: 0.7rem; 
+            cursor: pointer; 
+            font-weight: 700;
+            transition: all 0.2s;
+        }
+
+        .copy-btn:hover {
+            background: var(--primary);
+            color: #ffffff;
+        }
+
+        /* Scrollbar customization */
+        .formula-display::-webkit-scrollbar {
+            height: 4px;
+        }
+        .formula-display::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 10px;
+        }
+
+        /* Footer info */
+        .footer-note {
+            text-align: center;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 64px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>POTENTIAL UNITY THEORY</h1>
+</header>
+
+<div class="container">
+    <div id="toc-container" class="toc-card">
+        <div class="toc-title">Index / Table of Contents</div>
+        <ul id="toc-list" class="toc-list"></ul>
+    </div>
+    <div id="content-main"></div>
+    <div class="footer-note">2026 potential_unity_theory archival.</div>
+</div>
+
+<script>
+    const theoryData = [
+        {
+            section: "1. 認知ダイナミクスの基礎理論",
+            id: "sec1",
+            items: [
+                { title: "2.1 認知世界の定義", math: "W = W_{\\text{current\\&future}}" },
+                { title: "2.2 可能世界の順序づけ", math: "r : W \\to W" },
+                { title: "2.3 TCZの可能世界論的定義", math: "\\{ w \\mid \\forall y \\exists x r_{\\text{TCZ}}(x, y) \\}, x, y \\in W_{\\text{current\\&future}}" },
+                { title: "2.4 Self / Ego 演算子", math: "\\{ w \\mid \\forall y \\exists x s_{\\text{Self}}(x, y) \\}, s : \\text{TCZ} \\to \\text{TCZ}" },
+                { title: "2.5 Egoの最適制御モデル", math: "\\pi_c(x) = \\arg \\min_{u(t)} \\int_0^T V(x(t), t) dt" },
+                { title: "2.7 TCZの状態空間定義", math: "\\text{TCZ}(x_0) = \\bigcup_{t \\ge 0} \\{ x(t) \\in \\mathcal{R}(t; x_0) \\mid V(x(t), t) \\le \\theta \\}" }
+            ]
+        },
+        {
+            section: "2. 多主体および社会的拡張",
+            id: "sec2",
+            items: [
+                { title: "2.11.2 多主体への拡張", math: "\\pi_i = \\arg \\min_{u_i(t)} \\int_0^T ( V_i(x_i(t), t) + \\sum_j \\gamma_{ij} S_{ij}(x_i, x_j) ) dt" },
+                { title: "2.11.3 Shared TCZの定義", math: "\\text{TCZ}_\\eta^{\\text{shared}} = \\{ x \\in \\prod_i \\text{TCZ}_i \\mid \\text{Share}(x) \\ge \\eta \\}" },
+                { title: "2.12.3 抽象度依存型共有関数", math: "S_i(x; \\alpha_i) = \\sum_{j \\ne i} w_{ij}(\\alpha_i) d(x_i, x_j)" },
+                { title: "2.13.3 Shared-TCZの形式的定義", math: "\\text{TCZ}_{\\text{low}}^{\\text{shared}} = \\bigcap_{i=1}^N \\text{TCZ}_i" },
+                { title: "2.13.4 定理3（抽象Shared-TCZ収束）", math: "\\pi_i = \\arg \\min_{u_i(t)} \\int_0^T ( V_i(x_i(t), t) + \\sum_j \\gamma_{ij} S_{ij}(x_i, x_j) + \\eta_i A(x_i(t)) ) dt" }
+            ]
+        },
+        {
+            section: "3. 物理系との構造的対応",
+            id: "sec3",
+            items: [
+                { title: "4. 物理系における空間積分", math: "\\int U(r) \\rho dV" },
+                { title: "5. 境界効果", math: "\\gamma \\sim \\int_{\\partial\\Omega} U(r) dS" },
+                { title: "7. 統一累積原理", math: "\\int U(r) \\rho dV \\leftrightarrow \\int_0^T V(x(t), t) dt" }
+            ]
+        },
+        {
+            section: "4. 認知戦および情報生成",
+            id: "sec4",
+            items: [
+                { title: "13. 認知戦（評価関数の変容）", math: "V(x, t) \\to V'(x, t)" },
+                { title: "A.2 境界レベルの最小介入制御", math: "u^*_{\\text{cw}}(t) = \\arg \\min_{u(t)} \\int_0^T ( |V(x(t), t) - \\theta|^2 + \\lambda C(u(t)) ) dt" },
+                { title: "A.3 メッセージ受容モデル", math: "A(m \\mid x_t) = \\exp( - d( \\phi(m), \\text{TCZ}(x_t) )^2 / \\sigma^2 )" }
+            ]
+        },
+        {
+            section: "5. 付録：統一Lyapunov枠組み",
+            id: "sec5",
+            items: [
+                { title: "B. 統一Lyapunov設定（収束条件）", math: "\\nabla \\Phi(z) \\cdot F(z) \\le -\\alpha(\\Phi(z) - \\theta)" },
+                { title: "C. 定理2の複合Lyapunov関数", math: "\\mathcal{L}(x) = \\sum_i V_i(x_i) + \\sum_{i,j} \\gamma_{ij} S_{ij}(x_i, x_j)" },
+                { title: "D. 定理3の抽象Lyapunov関数", math: "\\mathcal{L}_A(x) = \\sum_i V_i(x_i) + \\sum_{i,j} \\gamma_{ij} S_{ij}(x_i, x_j) + \\eta A(x)" }
+            ]
+        }
+    ];
+
+    const tocList = document.getElementById('toc-list');
+    const contentMain = document.getElementById('content-main');
+
+    theoryData.forEach(data => {
+        const li = document.createElement('li');
+        li.innerHTML = `<a href="#${data.id}">${data.section}</a>`;
+        tocList.appendChild(li);
+
+        const h2 = document.createElement('h2');
+        h2.className = 'section-title';
+        h2.id = data.id;
+        h2.innerText = data.section;
+        contentMain.appendChild(h2);
+
+        data.items.forEach(item => {
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.innerHTML = `
+                <button class="copy-btn" onclick="copyText('${item.math.replace(/\\/g, '\\\\')}')">COPY</button>
+                <div class="card-header">${item.title}</div>
+                <div class="formula-display">$$ ${item.math} $$</div>
+            `;
+            contentMain.appendChild(card);
+        });
+    });
+
+    function copyText(text) {
+        navigator.clipboard.writeText(text).then(() => {
+            const btn = event.target;
+            const originalText = btn.innerText;
+            btn.innerText = 'COPIED!';
+            setTimeout(() => btn.innerText = originalText, 2000);
+        });
+    }
+</script>
+
+</body>
+</html>
