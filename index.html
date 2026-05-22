@@ -212,6 +212,7 @@ footer a:hover{text-decoration:underline;}
   <p>多エージェント認知系が包摂半順序束上で定義され、各主体 $i$ が以下の制御方策に従うとする：</p>
   <div class="fw"><div class="fl">束論的制御方策</div><div class="fm">$$\pi_i = \arg\min_{u_i(t)} \mathbb{E}\!\int_0^T \!\left(V_i(x_i(t), t) + \sum_j \gamma_{ij} S_{ij}(x_i, x_j) + \eta_i A(x_i(t))\right) dt$$</div></div>
   <p>$A(x)$ は束における上方移動（より高い抽象 / LUB 方向）に沿って単調減少する。適切な正則条件のもとで：</p>
+  <div class="fw"><div class="fl">簡易版</div><div class="fm">$$\pi = \arg \min \int (V + \sum \gamma S + \eta A) dt$$</div></div>
   <div class="fw"><div class="fl">定理３ — 収束先</div><div class="fm">$$x^*(t) \;\longrightarrow\; \mathrm{LUB}(W_1, \ldots, W_N)$$</div></div>
   <div class="fw"><div class="fl">包含関係</div><div class="fm">$$\mathrm{TCZ}^{\mathrm{shared}} \;\subseteq\; \mathrm{LUB}(W_1, W_2, \ldots, W_N)$$</div></div>
   <p>系のダイナミクスは二段階の収束を示す：低次（交差型共有 TCZ）と高次（LUB 型抽象共有 TCZ）。</p>
