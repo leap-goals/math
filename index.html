@@ -149,6 +149,7 @@ footer a:hover{text-decoration:underline;}
   <div class="sh"><span class="sn">08</span><span class="st">多主体への拡張（N 人の主体）<span class="sr">§ 2.11.2</span></span></div>
   <p>$i = 1, \ldots, N$ で索引付けされた $N$ 人の主体がいるとし、各主体は認知状態 $x_i(t)$ と評価 $V_i(x_i, t)$ を持つ：</p>
   <div class="fw"><div class="fl">多主体拡張制御方策</div><div class="fm">$$\pi_i = \arg\min_{u_i(t)} \int_0^T \!\left(V_i(x_i(t), t) + \sum_j \gamma_{ij}\, S_{ij}(x_i, x_j)\right) dt$$</div></div>
+  <div class="fw"><div class="fl">簡易版</div><div class="fm">$$\pi = \arg \min \int (V + \sum \gamma S)$$</div></div>
   <div class="dn">$S_{ij}(x_i, x_j) = \|x_i - x_j\|^2$：対ごとの社会的整合汎用関数（主体 $i$ と $j$ の認知的偏差）<br>$\gamma_{ij} > 0$：社会的認知結合係数。正の値は協調的（引力的）結合 → Shared-TCZ へ共収束</div>
 </div>
 
