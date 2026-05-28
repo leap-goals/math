@@ -263,6 +263,26 @@ footer a:hover{text-decoration:underline;}
   
   <p style="margin-top:0.9rem;">目的はTCZ内部での単なる安定化ではなく、認知的感度が最大となる境界近傍に系を維持することにある。</p>
 </div>
+　<div class="sec lv" id="s22">
+  <div class="sh"><span class="sn">A.3</span><span class="st">高抽象収束のためのマルチブリッジ情報生成 <span class="sr">§ A.3</span></span></div>
+  <p>認知戦における情報出力（メッセージ）の生成は、受容可能性と抽象度上昇の両立を最適化する問題として定式化される。</p>
+  
+  <div class="fw"><div class="fl">メッセージの受容可能性モデル</div><div class="fm">$$A(m \,|\, x_t) = \exp\!\left( -\frac{d(\phi(m), \mathrm{TCZ}(x_t))^2}{\sigma^2} \right)$$</div></div>
+  <div class="dn">
+    $\phi(m)$：メッセージの意味埋め込み ／ $\sigma$：受容帯域幅。<br>
+    TCZから離れたメッセージは指数関数的に受容が抑制される。
+  </div>
+
+  <p style="margin-top:0.9rem;">有効な生成は単一のメッセージではなく、メッセージの集合 $M_t = \{m_1, \ldots, m_K\}$ によるアンサンブル最適化に基づく：</p>
+  
+  <div class="fw"><div class="fl">メッセージアンサンブル最適化</div><div class="fm">$$\max_{M_t} \left[ \sum_{k=1}^K A(m_k \,|\, x_t) + \alpha \cdot \mathrm{Lift}(M_t) - \beta \cdot \mathrm{Frag}(M_t) - \gamma \cdot \mathrm{Decept}(M_t) \right]$$</div></div>
+  
+  <div class="dn">
+    $\mathrm{Lift}(M_t) = d(\mathrm{LUB}(\phi(m_1), \ldots, \phi(m_K)), \mathrm{LUB}_{\mathrm{target}})^{-1}$：高次抽象への上昇促進。<br>
+    $\mathrm{Frag}(M_t) = \sum_{i < j} \mathrm{Incoh}(\phi(m_i), \phi(m_j))$：メッセージ間不整合の抑制。<br>
+    $\mathrm{Decept}(M_t)$：欺瞞的・操作的構造へのペナルティ。
+  </div>
+</div>
 
 
 </main>
