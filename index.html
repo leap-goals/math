@@ -245,6 +245,25 @@ footer a:hover{text-decoration:underline;}
   <p class="ctag">未来の戦場は物理的地形ではなく、<br>認知ポテンシャルの地形の構造そのものである。</p>
   <p style="margin-top:.9rem;">有効な政策と戦略は行動の制御から構造の制御へと転換しなければならない。本論文はそのための数理的基盤を提示するものである。</p>
 </div>
+  <div class="divider">制御の精緻化</div>
+
+<div class="sec bl" id="s21">
+  <div class="sh"><span class="sn">A.2</span><span class="st">TCZ境界に基づく制御 <span class="sr">§ A.2</span></span></div>
+  <p>認知戦における制御実装は、TCZの深部への強制ではなく、境界近傍において最も効率的に達成される。</p>
+  
+  <div class="fw"><div class="fl">TCZ 境界の定義</div><div class="fm">$$\partial \mathrm{TCZ}(x_0) = \bigcup_{t \ge 0} \bigl\{ x(t) \in \mathfrak{R}(t;\, x_0) \;\big|\; V(x(t), t) = \theta \bigr\}$$</div></div>
+  
+  <p>制御は、この境界近傍において最小介入によって実行される：</p>
+  <div class="fw"><div class="fl">最小介入制御方策</div><div class="fm">$$u^*_{\mathrm{cw}}(t) = \arg\min_{u(t)} \int_0^T \left( |V(x(t), t) - \theta|^2 + \lambda C(u(t)) \right) dt$$</div></div>
+  
+  <div class="dn">
+    $|V(x(t), t) - \theta|^2$：境界に対するコスト項。TCZの内外双方から系を $V = \theta$ へと引き寄せる。<br>
+    $\lambda C(u(t))$：介入コスト項。最小限の労力で境界レベルの影響力を最大化する。
+  </div>
+  
+  <p style="margin-top:0.9rem;">目的はTCZ内部での単なる安定化ではなく、認知的感度が最大となる境界近傍に系を維持することにある。</p>
+</div>
+
 
 </main>
 
