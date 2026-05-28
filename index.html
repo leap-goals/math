@@ -265,7 +265,8 @@ footer a:hover{text-decoration:underline;}
 </div>
 　<div class="sec lv" id="s22">
   <div class="sh"><span class="sn">A.3</span><span class="st">高抽象収束のためのマルチブリッジ情報生成 <span class="sr">§ A.3</span></span></div>
-  <p>認知戦における情報出力（メッセージ）の生成は、受容可能性と抽象度上昇の両立を最適化する問題として定式化される。</p>
+  <p>上記の作戦的枠組みは、認知戦システムにおける情報出力（テキスト・画像等）の生成へとさらに拡張できる。</p>
+  <p>対象の現在のTCZ中心から意味的方向が大きく離れた単一の生成出力は受容されにくい。形式的に、$x_t$ を現在の認知状態、$\mathrm{TCZ}(x_t)$ を対応する安定領域、$\phi(m)$ をメッセージ $m$ の意味埋め込みとすると、メッセージの受容はモデル化できる：</p>
   
   <div class="fw"><div class="fl">メッセージの受容可能性モデル</div><div class="fm">$$A(m \,|\, x_t) = \exp\!\left( -\frac{d(\phi(m), \mathrm{TCZ}(x_t))^2}{\sigma^2} \right)$$</div></div>
   <div class="dn">
